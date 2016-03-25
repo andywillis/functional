@@ -10,6 +10,17 @@ function each(arr, fn) {
 }
 
 /**
+ * Recursive implementation of `each`
+ * @param  {Array}   arr Array
+ * @param  {Function} fn  Iterator
+ */
+function eachRecurse(arr, fn, i = 0) {
+  if (!arr.length) return;
+  fn(arr.shift(), i, arr);
+  return eachRecurse(arr, fn, ++i);
+}
+
+/**
  * Simple reduce function using `each`
  * @param  {Array}   arr  Array
  * @param  {Function} fn   Iterator
@@ -57,8 +68,26 @@ export function filter(arr, fn) {
  * @param {Number} a Number
  * @param {Number} b Number
  */
-export function add(a, b) {
+export function sum(a, b) {
   return a + b;
+}
+
+/**
+ * Simple square function
+ * @param  {Number} num Integer
+ * @return {Number}     Square
+ */
+export function square(num) {
+  return num * num;
+}
+
+/**
+ * Simple value checker
+ * @param  {Number/String} n Value to check
+ * @return {Function}   Curried function
+ */
+export function equals(n) {
+  return function (e) { return n === e; }
 }
 
 /**
