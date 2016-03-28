@@ -4,9 +4,10 @@ import { toType, square, map } from '../index.js';
 const a = [1, 2, 3];
 const b = [1, 4, 9];
 const c = [4, 9, 16];
+
 const squared = map(square, a);
 const squaredList = map(square, 2, 3, 4);
-console.log(squaredList)
+
 let actual;
 let expected;
 let desc;
