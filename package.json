@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "bundle": "browserify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map bundle.map --output dist/js/bundle.map] > dist/js/bundle.js",
+    "bundle": "browserify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map bundle.map --output dist/bundle.map] > dist/bundle.js",
     "test": "babel-tape-runner test/*.js | tap-spec",
-    "build": "npm run test && npm run bundle"
+    "createdist": "node node_modules/mkdirp/bin/cmd.js dist",
+    "build": "npm run test && npm run createdist && npm run bundle"
   },
   "devDependencies": {
     "babel": "^6.5.2",

@@ -37,30 +37,28 @@ export function reduce(fn, arr, init) {
 /**
  * Simple map function
  * @param  {Function}  fn     Iterator
- * @param  {...[Param list]} params Parameter list
+ * @param  {Array}     params Array
  * @return {Array}           Array
  */
-export function map(fn, ...params) {
-  const args = getArgs(params);
+export function map(fn, arr) {
   const out = [];
   each((el, i, orig) => {
     out.push(fn(el, i, orig));
-  }, args);
+  }, arr);
   return out;
 }
 
 /**
  * Simple filter function
  * @param  {Function}  fn     Iterator
- * @param  {...[Param list]} params Parameter list
+ * @param  {Array} params     Array
  * @return {Array}           Array
  */
-export function filter(fn, ...params) {
-  const args = getArgs(params);
+export function filter(fn, arr) {
   const out = [];
   each((el, i, orig) => {
     if (fn(el, i, orig)) out.push(el);
-  }, args);
+  }, arr);
   return out;
 }
 
