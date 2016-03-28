@@ -1,16 +1,16 @@
 /**
- * [getArgs description]
- * @param  {[type]} args [description]
- * @return {[type]}      [description]
+ * Returns an array of function arguments
+ * @param  {Array} args Arguments
+ * @return {Array}      Array of remunged arguments
  */
 function getArgs(args) {
   return Array.isArray(args[0]) ? args[0] : args;
 }
 
 /**
- * [each description]
- * @param  {Function} fn [description]
- * @return {[type]}      [description]
+ * Simple each function
+ * @param  {Function}  fn     Iterator
+ * @param  {...[Param list]} params Function parameters
  */
 function each(fn, ...params) {
   const args = getArgs(params);
@@ -20,11 +20,11 @@ function each(fn, ...params) {
 }
 
 /**
- * Simple reduce function using `each`
- * @param  {Array}   arr  Array
+ * Simple reduce function
  * @param  {Function} fn   Iterator
- * @param  {Integer/Array/Object}   base Inital value
- * @return {Integer/Array/Object}        Return value
+ * @param  {Array}   arr  Array
+ * @param  {Object/Integer/String}   init Initial value
+ * @return {Object/Integer/String}        Reduced array
  */
 export function reduce(fn, arr, init) {
   let base = init || 0;
@@ -35,10 +35,10 @@ export function reduce(fn, arr, init) {
 }
 
 /**
- * Simple map function using `each`
- * @param  {Array}   arr Array
- * @param  {Function} fn  Iterator
- * @return {Array}       Array
+ * Simple map function
+ * @param  {Function}  fn     Iterator
+ * @param  {...[Param list]} params Parameter list
+ * @return {Array}           Array
  */
 export function map(fn, ...params) {
   const args = getArgs(params);
@@ -51,15 +51,15 @@ export function map(fn, ...params) {
 
 /**
  * Simple filter function
- * @param  {Array}   arr Array
- * @param  {Function} fn  Function
- * @return {Array}       Array
+ * @param  {Function}  fn     Iterator
+ * @param  {...[Param list]} params Parameter list
+ * @return {Array}           Array
  */
 export function filter(fn, ...params) {
   const args = getArgs(params);
   const out = [];
   each((el, i, orig) => {
-    if (fn(el)) out.push(el);
+    if (fn(el, i, orig)) out.push(el);
   }, args);
   return out;
 }
