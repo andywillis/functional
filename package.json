@@ -4,7 +4,7 @@
   "description": "Functional toolbox",
   "main": "index.js",
   "scripts": {
-    "prepublish": "git clean -d -x -i && npm test",
+    "prepublish": "git clean -d -f && npm test",
     "version": "npm run build && git add -A dist",
     "postversion": "git push && git push --tags",
     "bundle": "browserify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map utils.map --output dist/utils.map] > dist/utils.js",
