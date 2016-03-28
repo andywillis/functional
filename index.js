@@ -1,20 +1,13 @@
 /**
- * Returns an array of function arguments
- * @param  {Array} args Arguments
- * @return {Array}      Array of remunged arguments
- */
-function getArgs(args) {
-  return Array.isArray(args[0]) ? args[0] : args;
-}
-
-/**
  * Simple each function
  * @param  {Function}  fn     Iterator
  * @param  {...[Param list]} params Function parameters
  */
 function each(fn, arr) {
-  for (let i = 0, l = arr.length; i < l; i++) {
-    fn(arr[i], i, arr);
+  let index = -1;
+  const len = arr.length;
+  while (++index < len) {
+    fn(arr[index], index, arr);
   }
 }
 
