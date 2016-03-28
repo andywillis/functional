@@ -1,8 +1,11 @@
 {
-  "name": "functional",
-  "version": "1.0.6",
-  "description": "Functional toolbox",
+  "name": "uws-functional",
+  "version": "1.0.0",
+  "description": "Functional toolkit",
   "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "prepublish": "git clean -d -f & npm test",
     "version": "npm run build & git add -A dist",
@@ -29,6 +32,18 @@
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andywillis/uws-functional.git"
+  },
+  "keywords": [
+    "functional",
+    "toolkit"
+  ],
+  "author": "Andy Willis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andywillis/uws-functional/issues"
+  },
+  "homepage": "https://github.com/andywillis/uws-functional#readme"
 }
