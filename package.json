@@ -2,12 +2,12 @@
   "name": "functional",
   "version": "1.0.0",
   "description": "",
-  "main": "functional.js",
+  "main": "index.js",
   "scripts": {
     "bundle": "browserify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map bundle.map --output dist/js/bundle.map] > dist/js/bundle.js",
     "test": "babel-tape-runner test/*.js | tap-spec",
     "build": "npm test && npm run bundle",
-    "pack": "webpack -p",
+    "pack": "webpack -p"
   },
   "devDependencies": {
     "babel": "^6.5.2",
