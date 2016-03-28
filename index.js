@@ -12,10 +12,9 @@ function getArgs(args) {
  * @param  {Function}  fn     Iterator
  * @param  {...[Param list]} params Function parameters
  */
-function each(fn, ...params) {
-  const args = getArgs(params);
-  for (let i = 0, l = args.length; i < l; i++) {
-    fn(args[i], i, args);
+function each(fn, arr) {
+  for (let i = 0, l = arr.length; i < l; i++) {
+    fn(arr[i], i, arr);
   }
 }
 
