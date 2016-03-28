@@ -13,7 +13,8 @@
     "bundle": "browserify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map uws-functional.map --output dist/uws-functional.map] > dist/uws-functional.min.js",
     "test": "babel-tape-runner test/*.js | tap-spec",
     "createdist": "node node_modules/mkdirp/bin/cmd.js dist",
-    "build": "npm run createdist & npm run bundle"
+    "build": "npm run createdist & npm run bundle",
+    "watch": "watchify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map uws-functional.map --output dist/uws-functional.map] -o dist/uws-functional.min.js"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -45,5 +46,10 @@
   "bugs": {
     "url": "https://github.com/andywillis/uws-functional/issues"
   },
-  "homepage": "https://github.com/andywillis/uws-functional#readme"
+  "homepage": "https://github.com/andywillis/uws-functional#readme",
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  }
 }
