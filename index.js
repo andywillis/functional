@@ -1,7 +1,7 @@
 /**
  * Simple each function
  * @param  {Function}  fn     Iterator
- * @param  {...[Param list]} params Function parameters
+ * @param  {Array} params     Array
  */
 function each(fn, arr) {
   let index = -1;
