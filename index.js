@@ -7,6 +7,7 @@ function getArgs(args) {
   return Array.isArray(args[0]) ? args[0] : args;
 }
 
+
 /**
  * Simple each function
  * @param  {Function}  fn     Iterator
@@ -18,6 +19,7 @@ function each(fn, ...params) {
     fn(args[i], i, args);
   }
 }
+
 
 /**
  * Simple reduce function
@@ -34,6 +36,7 @@ export function reduce(fn, arr, init) {
   return base;
 }
 
+
 /**
  * Simple map function
  * @param  {Function}  fn     Iterator
@@ -48,6 +51,7 @@ export function map(fn, ...params) {
   }, args);
   return out;
 }
+
 
 /**
  * Simple filter function
@@ -64,12 +68,14 @@ export function filter(fn, ...params) {
   return out;
 }
 
+
 /**
  * Simple add function
  * @param {Number} a Number
  * @param {Number} b Number
  */
 export const sum = (a, b) => a + b;
+
 
 /**
  * Simple square function
@@ -78,12 +84,14 @@ export const sum = (a, b) => a + b;
  */
 export const square = (num) => num * num;
 
+
 /**
  * Simple value checker
  * @param  {Number/String} n Value to check
  * @return {Function}   Function
  */
 export const equalTo = (n) => (e) => n === e;
+
 
 /**
  * Simple sum function
@@ -92,18 +100,20 @@ export const equalTo = (n) => (e) => n === e;
  */
 export const multiply = (a, b) => a * b;
 
+
 /**
- * [description]
- * @param  {[type]} n) [description]
- * @return {[type]}    [description]
+ * Simple greaterThan function
+ * @param  {Number} n) Number to test
+ * @return {Boolean}   Result of test
  */
 export const greaterThan = (n) => (e) => e > n;
 
+
 /**
- * [description]
- * @param  {[type]} x [description]
- * @return {[type]}   [description]
+ * Returns the proper name of a JS object
+ * @param  {Object} x JS object
+ * @return {String}   String
  */
-export const toType = (x) => {
+export function toType(x) {
   return ({}).toString.call(x).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 }
