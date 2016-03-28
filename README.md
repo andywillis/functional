@@ -10,4 +10,4 @@ To test:
 
 To build:
 
-`npm build`
+`npm run build`
