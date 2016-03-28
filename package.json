@@ -1,6 +1,6 @@
 {
   "name": "uws-functional",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Functional toolkit",
   "main": "index.js",
   "directories": {
