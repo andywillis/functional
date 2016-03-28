@@ -1,4 +1,4 @@
-# functional
+# uws-functional
 
 Some functional utils and tape tests.
 
