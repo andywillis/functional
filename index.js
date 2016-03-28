@@ -12,22 +12,11 @@ function getArgs(args) {
  * @param  {Function} fn [description]
  * @return {[type]}      [description]
  */
-function each(fn) {
-  const args = getArgs([].slice.call(arguments, 1));
+function each(fn, ...params) {
+  const args = getArgs(params);
   for (let i = 0, l = args.length; i < l; i++) {
     fn(args[i], i, args);
   }
-}
-
-/**
- * Recursive implementation of `each`
- * @param  {Array}   arr Array
- * @param  {Function} fn  Iterator
- */
-function eachRecurse(fn, arr, i = 0) {
-  if (!arr.length) return;
-  fn(arr.shift(), i, arr);
-  return eachRecurse(fn, arr, ++i);
 }
 
 /**
@@ -51,11 +40,12 @@ export function reduce(fn, arr, init) {
  * @param  {Function} fn  Iterator
  * @return {Array}       Array
  */
-export function map(fn, arr) {
+export function map(fn, ...params) {
+  const args = getArgs(params);
   const out = [];
   each((el, i, orig) => {
     out.push(fn(el, i, orig));
-  }, arr);
+  }, args);
   return out;
 }
 
@@ -65,11 +55,12 @@ export function map(fn, arr) {
  * @param  {Function} fn  Function
  * @return {Array}       Array
  */
-export function filter(fn, arr) {
+export function filter(fn, ...params) {
+  const args = getArgs(params);
   const out = [];
   each((el, i, orig) => {
     if (fn(el)) out.push(el);
-  }, arr);
+  }, args);
   return out;
 }
 
