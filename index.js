@@ -90,6 +90,13 @@ export const multiply = (a, b) => a * b;
 export const greaterThan = (n) => (e) => e > n;
 
 /**
+ * Simple lessThan function
+ * @param  {[type]} n) [description]
+ * @return {[type]}    [description]
+ */
+export const lessThan = (n) => (e) => e < n;
+
+/**
  * Returns the proper name of a JS object
  * @param  {Object} x JS object
  * @return {String}   String
@@ -97,3 +104,5 @@ export const greaterThan = (n) => (e) => e > n;
 export function toType(x) {
   return ({}).toString.call(x).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 }
+
+console.log(reduce(sum, [1,2,3]));
