@@ -7,3 +7,7 @@ Some functional utils and tape tests.
 To test:
 
 `npm test`
+
+To build:
+
+`npm build`
