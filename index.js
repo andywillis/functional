@@ -104,5 +104,3 @@ export const lessThan = (n) => (e) => e < n;
 export function toType(x) {
   return ({}).toString.call(x).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 }
-
-console.log(reduce(sum, [1,2,3]));
