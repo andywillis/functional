@@ -1,6 +1,6 @@
 {
   "name": "uws-functional",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Functional toolkit",
   "main": "index.js",
   "directories": {
@@ -10,7 +10,7 @@
     "prepublish": "git clean -d -f & npm test",
     "version": "npm run build & git add -A dist",
     "postversion": "git push & git push --tags",
-    "bundle": "browserify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map utils.map --output dist/functional.map] > dist/functional.js",
+    "bundle": "browserify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map uws-functional.map --output dist/uws-functional.map] > dist/uws-functional.min.js",
     "test": "babel-tape-runner test/*.js | tap-spec",
     "createdist": "node node_modules/mkdirp/bin/cmd.js dist",
     "build": "npm run createdist & npm run bundle"
