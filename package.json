@@ -7,13 +7,13 @@
     "test": "test"
   },
   "scripts": {
-    "prepublish": "git clean -d -f & npm test",
-    "version": "npm run build & git add -A dist",
-    "postversion": "git push & git push --tags",
+    "prepublish": "concurrently -r \"git clean -d -f\" \"npm run test\"",
+    "version": "concurrently -r \"npm run build\" \"git add -A dist\"",
+    "postversion": "concurrently -r \"git push\" \"git push --tags\"",
     "bundle": "browserify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map uws-functional.map --output dist/uws-functional.map] > dist/uws-functional.min.js",
     "test": "babel-tape-runner test/*.js | tap-spec",
     "createdist": "node node_modules/mkdirp/bin/cmd.js dist",
-    "build": "npm run createdist & npm run bundle",
+    "build": "concurrently -r \"npm run createdist\" \"npm run bundle\"",
     "watch": "watchify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map uws-functional.map --output dist/uws-functional.map] -o dist/uws-functional.min.js"
   },
   "devDependencies": {
