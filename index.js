@@ -55,11 +55,41 @@ export function filter(fn, arr) {
 }
 
 /**
- * Simple add function
+ * Simple compose function
+ * @param  {Params} fns List of fn
+ * @return {Any}        [description]
+ */
+export function compose(...fns) {
+  return function (...args) {
+    for (let i = fns.length - 1; i >= 0; i--) {
+      args = [fns[i].apply(this, args)];
+    }
+    return args[0];
+  };
+}
+
+/**
+ * Simple sequence function
+ * @param  {Params} args Function list
+ * @return {Any}         Output
+ */
+export function sequence(...args) {
+  return compose.apply(this, args.reverse());
+}
+
+/**
+ * Simple sum function
  * @param {Number} a Number
  * @param {Number} b Number
  */
 export const sum = (a, b) => a + b;
+
+/**
+ * [description]
+ * @param  {[type]} n) [description]
+ * @return {[type]}    [description]
+ */
+export const addInt = (n) => (el) => el + n;
 
 /**
  * Simple square function
