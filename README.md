@@ -2,7 +2,7 @@
 
 Some functional utils and tape tests.
 
-`npm install`
+`npm install uws-functional`
 
 To test:
 
