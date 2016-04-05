@@ -20,12 +20,12 @@ test('reduce()', (t) => {
 
   actual = reduced;
   expected = b;
-  desc = ['sum() applied to [', a, '] should return ', b].join('');
+  desc = ['sum() applied to ', a, ' should return ', b].join('');
   t.equal(actual, expected, desc);
 
   actual = reduced;
   expected = c;
-  desc = ['sum() applied to [', a, '] should not return ', c].join('');
+  desc = ['sum() applied to ', a, ' should not return ', c].join('');
   t.notEqual(actual, expected, desc);
 
   t.end();

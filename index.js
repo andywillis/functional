@@ -12,6 +12,13 @@ const each = (fn, arr) => {
 };
 
 /**
+ * Returns JSON
+ * @param  {Any} obj Object
+ * @return {String}     JSON
+ */
+export const toJSON = (obj) => JSON.stringify(obj);
+
+/**
  * Simple reduce function
  * @param  {Function} fn   Iterator
  * @param  {Array}   arr  Array
@@ -84,6 +91,13 @@ export const sequence = (...args) => {
  * @return {Object}      Object
  */
 export const pluck = (fn, p) => (el) => fn(el[p]);
+
+/**
+ * Pick out object property values
+ * @param  {String} p property key
+ * @return {Function}    A function to test element property p
+ */
+export const pick = (p) => (el) => el[p];
 
 /**
  * Simple sum function

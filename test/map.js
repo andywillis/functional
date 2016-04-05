@@ -20,7 +20,7 @@ test('map()', (t) => {
 
   actual = squared;
   expected = b;
-  desc = ['square() applied to [', a, '] should return ', b].join('');
+  desc = ['square() applied to ', a, ' should return ', b].join('');
   t.deepEqual(actual, expected, desc);
 
   t.end();

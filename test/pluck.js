@@ -10,7 +10,7 @@ let actual;
 let expected;
 let desc;
 
-test('filter()', (t) => {
+test('pluck()', (t) => {
   t.plan(2);
 
   actual = toType(plucked);
@@ -20,7 +20,7 @@ test('filter()', (t) => {
 
   actual = plucked;
   expected = c;
-  desc = ['pluck(greaterThan(1), \'id\') applied to [', a, '] should return [', c, ']'].join('');
+  desc = 'filter(pluck(greaterThan(1), \'id\'), sample) should return correct array';
   t.deepEqual(actual, expected, desc);
 
   t.end();
