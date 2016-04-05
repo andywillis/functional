@@ -3,13 +3,13 @@
  * @param  {Function}  fn     Iterator
  * @param  {Array} params     Array
  */
-function each(fn, arr) {
+const each = (fn, arr) => {
   let index = -1;
   const len = arr.length;
   while (++index < len) {
     fn(arr[index], index, arr);
   }
-}
+};
 
 /**
  * Simple reduce function
@@ -18,13 +18,13 @@ function each(fn, arr) {
  * @param  {Object/Integer/String}   init Initial value
  * @return {Object/Integer/String}        Reduced array
  */
-export function reduce(fn, arr, init) {
+export const reduce = (fn, arr, init) => {
   let base = init || 0;
   each((el, i, orig) => {
     base = fn(base, el, i, orig);
   }, arr);
   return base;
-}
+};
 
 /**
  * Simple map function
@@ -32,13 +32,13 @@ export function reduce(fn, arr, init) {
  * @param  {Array}     params Array
  * @return {Array}           Array
  */
-export function map(fn, arr) {
+export const map = (fn, arr) => {
   const out = [];
   each((el, i, orig) => {
     out.push(fn(el, i, orig));
   }, arr);
   return out;
-}
+};
 
 /**
  * Simple filter function
@@ -46,20 +46,58 @@ export function map(fn, arr) {
  * @param  {Array} params     Array
  * @return {Array}           Array
  */
-export function filter(fn, arr) {
+export const filter = (fn, arr) => {
   const out = [];
   each((el, i, orig) => {
     if (fn(el, i, orig)) out.push(el);
   }, arr);
   return out;
-}
+};
 
 /**
- * Simple add function
+ * Simple compose function
+ * @param  {Params} fns List of fn
+ * @return {Any}        [description]
+ */
+export const compose = (...fns) => {
+  return function (...args) {
+    for (let i = fns.length - 1; i >= 0; i--) {
+      args = [fns[i].apply(this, args)];
+    }
+    return args[0];
+  };
+};
+
+/**
+ * Simple sequence function
+ * @param  {Params} args Function list
+ * @return {Any}         Output
+ */
+export const sequence = (...args) => {
+  return compose.apply(this, args.reverse());
+};
+
+/**
+ * Plucks an object from an array where a property passes the test
+ * @param  {Function} test Testing function
+ * @param  {String}   p Object property
+ * @return {Object}      Object
+ */
+export const pluck = (fn, p) => (el) => fn(el[p]);
+
+/**
+ * Simple sum function
  * @param {Number} a Number
  * @param {Number} b Number
  */
 export const sum = (a, b) => a + b;
+
+/**
+ * [description]
+ * @param  {[type]} n) [description]
+ * @return {[type]}    [description]
+ */
+export const addInt = (n) => (el) => el + n;
 
 /**
  * Simple square function
@@ -101,6 +139,6 @@ export const lessThan = (n) => (e) => e < n;
  * @param  {Object} x JS object
  * @return {String}   String
  */
-export function toType(x) {
+export const toType = (x) => {
   return ({}).toString.call(x).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
-}
+};
