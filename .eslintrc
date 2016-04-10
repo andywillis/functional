@@ -1,5 +1,8 @@
 {
   "extends": "airbnb",
+  "plugins": [
+    "react"
+  ],
   ecmaFeatures: { modules: true },
   rules: {
     "default-case": 0,
@@ -8,6 +11,6 @@
     "no-console": 0,
     "comma-dangle": 0,
     "padded-blocks": 0,
-    "arrow-body-style": ["as-needed"]
+    "arrow-body-style": 0
   }
 }

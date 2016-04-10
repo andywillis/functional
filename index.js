@@ -48,6 +48,7 @@ export const map = (fn, arr) => {
 };
 
 /**
+ *
  * Simple filter function
  * @param  {Function}  fn     Iterator
  * @param  {Array} params     Array
@@ -156,3 +157,25 @@ export const lessThan = (n) => (e) => e < n;
 export const toType = (x) => {
   return ({}).toString.call(x).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 };
+
+/**
+ * Returns object keys
+ * @param  {Object} obj Object
+ * @return {Array}     Keys
+ */
+export const keys = (obj) => Object.keys(obj);
+
+/**
+ * Returns object values
+ * @param  {Object} obj Object
+ * @return {Array}      Values
+ */
+export const values = (obj) => map((el) => obj[el], keys(obj));
+
+/**
+ * Creates objects from mixins
+ * @param  {Objects} args Set of mixins
+ * @return {Object}       New object
+ */
+export const composeObj = (...args) => Object.assign.apply({}, args);
+

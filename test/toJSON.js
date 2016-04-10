@@ -13,7 +13,7 @@ test('pluck()', (t) => {
 
   actual = toJSON(a);
   expected = b;
-  desc = 'should return string';
+  desc = 'should return a string';
   t.equal(actual, expected, desc);
 
   t.end();
