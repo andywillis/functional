@@ -1,26 +1,35 @@
 import test from 'blue-tape';
-import { toType, greaterThan, filter } from '../index.js';
+import { join, toType, greaterThan, filter } from '../index.js';
 
 const a = [1, 2, 3];
 const b = 1;
 const c = [2, 3];
-const filtered = filter(greaterThan(b), a);
 
 let actual;
 let expected;
 let desc;
 
 test('filter()', (t) => {
-  t.plan(2);
+  t.plan(4);
 
-  actual = toType(filtered);
-  expected = 'array';
-  desc = 'should return an array';
+  actual = filter(greaterThan(b), 1);
+  expected = false;
+  desc = 'Passing in a non-array should return false';
   t.equal(actual, expected, desc);
 
-  actual = filtered;
+  actual = filter(1, [1, 2]);
+  expected = false;
+  desc = 'Passing in a non-function should return false';
+  t.equal(actual, expected, desc);
+
+  actual = toType(filter(greaterThan(b), a));
+  expected = 'array';
+  desc = 'filter(fn, arr) should return an array';
+  t.equal(actual, expected, desc);
+
+  actual = filter(greaterThan(b), a);
   expected = c;
-  desc = ['greaterThan(1) applied to [', a, '] should return [', c, ']'].join('');
+  desc = join(['greaterThan(1) applied to [', a, '] should return [', c, ']']);
   t.deepEqual(actual, expected, desc);
 
   t.end();

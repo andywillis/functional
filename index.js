@@ -1,14 +1,47 @@
 /**
- * Simple each function
- * @param  {Function}  fn     Iterator
- * @param  {Array} params     Array
+ * Returns the proper name of a JS object
+ * @param  {Object} x JS object
+ * @return {String}   String
  */
-const each = (fn, arr) => {
-  let index = -1;
-  const len = arr.length;
-  while (++index < len) {
-    fn(arr[index], index, arr);
-  }
+export const toType = (x) => (
+  ({}).toString.call(x).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+);
+
+/**
+ * Checks if argument is an array
+ * @param  {All} x Variable to be checked;
+ * @return {Boolean}     is an array
+ */
+export const isArray = (x) => x && toType(x) === 'array';
+
+/**
+ * Checks if argument is an object
+ * @param  {All} x Variable to be checked;
+ * @return {Boolean}     is an object
+ */
+export const isObject = (x) => x && toType(x) === 'object';
+
+/**
+ * Checks if argument is a function
+ * @param  {All} x Variable to be checked;
+ * @return {Boolean}     is an function
+ */
+export const isFunction = (x) => x && toType(x) === 'function';
+
+/**
+ * Checks if argument is a string
+ * @param  {All} x Variable to be checked
+ * @return {Boolean}   is a string
+ */
+export const isString = (x) => x && toType(x) === 'string';
+
+/**
+ * Checks if argument is ann integer
+ * @param  {All} x Variable to be checked
+ * @return {Boolean}   is an integer
+ */
+export const isInteger = (x) => {
+  return x && (toType(x) === 'number') && (x >= 0) && (x % 1 === 0);
 };
 
 /**
@@ -16,7 +49,32 @@ const each = (fn, arr) => {
  * @param  {Any} obj Object
  * @return {String}     JSON
  */
-export const toJSON = (obj) => JSON.stringify(obj);
+export const toJSON = (obj) => obj && isObject(obj) && JSON.stringify(obj);
+
+/**
+ * Returns a string from an array
+ * @param  {Array} arr       Array
+ * @param  {String} delimeter Join delimeter
+ * @return {String}           String
+ */
+export const join = (arr, delimeter) => {
+  if (!isArray(arr)) return false;
+  return arr.join(delimeter || '');
+};
+
+/**
+ * Simple each function
+ * @param  {Function}  fn     Iterator
+ * @param  {Array} params     Array
+ */
+function each(fn, arr) {
+  if (!isArray(arr) || !isFunction(fn)) return false;
+  let index = -1;
+  const len = arr.length;
+  while (++index < len) {
+    fn(arr[index], index, arr);
+  }
+}
 
 /**
  * Simple reduce function
@@ -26,6 +84,7 @@ export const toJSON = (obj) => JSON.stringify(obj);
  * @return {Object/Integer/String}        Reduced array
  */
 export const reduce = (fn, arr, init) => {
+  if (!isArray(arr) || !isFunction(fn)) return false;
   let base = init || 0;
   each((el, i, orig) => {
     base = fn(base, el, i, orig);
@@ -40,6 +99,7 @@ export const reduce = (fn, arr, init) => {
  * @return {Array}           Array
  */
 export const map = (fn, arr) => {
+  if (!isArray(arr) || !isFunction(fn)) return false;
   const out = [];
   each((el, i, orig) => {
     out.push(fn(el, i, orig));
@@ -55,11 +115,28 @@ export const map = (fn, arr) => {
  * @return {Array}           Array
  */
 export const filter = (fn, arr) => {
+  if (!isArray(arr) || !isFunction(fn)) return false;
   const out = [];
   each((el, i, orig) => {
     if (fn(el, i, orig)) out.push(el);
   }, arr);
   return out;
+};
+
+/**
+ * Does each element satisfy the test
+ * @param  {Function} fn  [description]
+ * @param  {[type]}   arr [description]
+ * @return {[type]}       [description]
+ */
+export const every = (fn, arr) => {
+  if (!isArray(arr) || !isFunction(fn)) return false;
+  let index = -1;
+  const len = arr.length;
+  while (++index < len) {
+    if (!fn(arr[index], index, arr)) return false;
+  }
+  return true;
 };
 
 /**
@@ -86,19 +163,16 @@ export const sequence = (...args) => {
 };
 
 /**
- * Plucks an object from an array where a property passes the test
- * @param  {Function} test Testing function
- * @param  {String}   p Object property
- * @return {Object}      Object
- */
-export const pluck = (fn, p) => (el) => fn(el[p]);
-
-/**
  * Pick out object property values
  * @param  {String} p property key
  * @return {Function}    A function to test element property p
  */
-export const pick = (p) => (el) => el[p];
+export const pick = (...args) => {
+  const fn = (args.length === 2) ? args.shift() : null;
+  const p = args[0];
+  if ((fn && !isFunction(fn)) || !isString(p)) return false;
+  return el => (fn ? fn(el[p]) : el[p]);
+};
 
 /**
  * Simple sum function
@@ -126,21 +200,31 @@ export const square = (num) => num * num;
  * @param  {Number/String} n Value to check
  * @return {Function}   Function
  */
-export const equalTo = (n) => (e) => n === e;
+export const equalTo = (n) => {
+  if (!n) return false;
+  return el => n === el;
+};
 
 /**
  * Simple sum function
  * @param {Number} a Number
  * @param {Number} b Number
  */
-export const multiply = (a, b) => a * b;
+export const multiply = (a, b) => {
+  if (!a || !b) return false;
+  if (!isInteger(a) || !isInteger(b)) return false;
+  return a * b;
+};
 
 /**
  * Simple greaterThan function
  * @param  {Number} n) Number to test
  * @return {Boolean}   Result of test
  */
-export const greaterThan = (n) => (e) => e > n;
+export const greaterThan = (n) => {
+  if (!n) return false;
+  return el => el > n;
+};
 
 /**
  * Simple lessThan function
@@ -150,32 +234,41 @@ export const greaterThan = (n) => (e) => e > n;
 export const lessThan = (n) => (e) => e < n;
 
 /**
- * Returns the proper name of a JS object
- * @param  {Object} x JS object
- * @return {String}   String
- */
-export const toType = (x) => {
-  return ({}).toString.call(x).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
-};
-
-/**
  * Returns object keys
  * @param  {Object} obj Object
  * @return {Array}     Keys
  */
-export const keys = (obj) => Object.keys(obj);
+export const keys = (x) => (
+  isObject(x) && Object.keys(x)
+);
 
 /**
  * Returns object values
  * @param  {Object} obj Object
  * @return {Array}      Values
  */
-export const values = (obj) => map((el) => obj[el], keys(obj));
+export const values = (x) => (
+  isObject(x) && map((el) => x[el], keys(x))
+);
 
 /**
  * Creates objects from mixins
  * @param  {Objects} args Set of mixins
  * @return {Object}       New object
  */
-export const composeObj = (...args) => Object.assign.apply({}, args);
+export const composeObj = (...args) => (
+  Object.assign.apply({}, args)
+);
 
+/**
+ * Checks whether two arrays share the same elements
+ * @param  {Array} arr1 Array 1
+ * @return {Function}   Tests the arr1 against any new array
+ */
+export const hasSameElements = (x) => {
+  if (!isArray(x)) return false;
+  return function (y) {
+    if (x.length !== y.length) return false;
+    return y.every(el => x.indexOf(el) > -1);
+  };
+};
