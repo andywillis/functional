@@ -66,7 +66,7 @@ export const isInteger = (x) => (
  * @return {String}     JSON
  */
 export const toJSON = (x) => {
-  if (!x || isNull(x) || !isUndefined(x) || !isFunction(x)) return false;
+  if (!x || isNull(x) || isUndefined(x) || isFunction(x)) return false;
   return JSON.stringify(x);
 };
 
