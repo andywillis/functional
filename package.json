@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint test src",
     "clean": "rimraf build && mkdir build",
-    "prepublish": "concurrently -r \"git clean -d -f\" \"npm run test\"",
+    "cleanandtest": "concurrently -r \"git clean -d -f\" \"npm run test\"",
     "version": "concurrently -r \"npm run build\" \"git add -A dist\"",
     "postversion": "concurrently -r \"git push\" \"git push --tags\"",
     "test": "babel-tape-runner test/*.js | tap-spec",
