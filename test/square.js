@@ -1,4 +1,4 @@
-import test from 'blue-tape';
+import test from 'tap';
 import { join, square } from '../index.js';
 
 let actual;
