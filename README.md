@@ -1,4 +1,4 @@
-[ ![Codeship Status for andywillis/uws-functional](https://codeship.com/projects/d01f1b80-e283-0133-5288-2e7ba760e325/status?branch=master)](https://codeship.com/projects/145624)
+[![Codeship](https://img.shields.io/codeship/d6c1ddd0-16a3-0132-5f85-2e35c05e22b1.svg?maxAge=2592000)](https://codeship.com/projects/145624)
 [![Coverage Status](https://coveralls.io/repos/github/andywillis/uws-functional/badge.svg?branch=master)](https://coveralls.io/github/andywillis/uws-functional?branch=master)
 [![npm](https://img.shields.io/npm/v/npm.svg?maxAge=2592000)](https://github.com/andywillis/uws-functional)
 [![Gemnasium](https://img.shields.io/gemnasium/mathiasbynens/he.svg?maxAge=2592000)](https://github.com/andywillis/uws-functional)
