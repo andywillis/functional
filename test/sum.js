@@ -1,24 +1,38 @@
 import test from 'blue-tape';
-import { sum } from '../index.js';
-
-const a = 1;
-const b = 2;
+import { join, toType, sum } from '../index.js';
 
 let actual;
 let expected;
 let desc;
 
 test('sum()', (t) => {
-  t.plan(2);
+  t.plan(4);
 
-  actual = typeof sum(a, b);
-  expected = 'number';
-  desc = 'should return a number';
+  // Test arguments
+
+  desc = 'Passing in a non-integer should return false';
+  actual = sum(null, 1);
+  expected = false;
   t.equal(actual, expected, desc);
 
+  desc = 'Passing in a non-integer should return false';
+  actual = sum(1, null);
+  expected = false;
+  t.equal(actual, expected, desc);
+
+  // Test return
+
+  const a = 1;
+  const b = 2;
+
+  desc = join(['sum(', a, ', ', b, ') should return a number']);
+  actual = toType(sum(a, b));
+  expected = 'number';
+  t.equal(actual, expected, desc);
+
+  desc = join(['sum(', a, ', ', b, ') should return 3']);
   actual = sum(a, b);
   expected = 3;
-  desc = ['(', a, ' + ', b, ') should return 3'].join('');
   t.equal(actual, expected, desc);
 
   t.end();

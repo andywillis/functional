@@ -1,10 +1,14 @@
 {
   "extends": "airbnb",
-  "plugins": [
-    "react"
-  ],
-  ecmaFeatures: { modules: true },
-  rules: {
+  "plugins": ["react"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
     "default-case": 0,
     "func-names": 0,
     "space-before-function-paren": [2, { "anonymous": "always", "named": "never" }],

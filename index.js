@@ -8,48 +8,67 @@ export const toType = (x) => (
 );
 
 /**
+ * Checks if argument is null
+ * @param  {All} x Argument to be checked
+ * @return {Boolean}   is null
+ */
+export const isNull = (x) => x && (toType(x) === 'null');
+
+/**
+ * Checks if argument is undefined
+ * @param  {All} x Argument to be checked
+ * @return {Boolean}   is undefined
+ */
+export const isUndefined = (x) => x && (toType(x) === 'undefined');
+
+/**
  * Checks if argument is an array
- * @param  {All} x Variable to be checked;
+ * @param  {All} x Argument to be checked;
  * @return {Boolean}     is an array
  */
 export const isArray = (x) => x && toType(x) === 'array';
 
 /**
  * Checks if argument is an object
- * @param  {All} x Variable to be checked;
+ * @param  {All} x Argument to be checked;
  * @return {Boolean}     is an object
  */
-export const isObject = (x) => x && toType(x) === 'object';
+export const isObject = (x) => (
+  x && !isNull(x) && toType(x) === 'object'
+);
 
 /**
  * Checks if argument is a function
- * @param  {All} x Variable to be checked;
+ * @param  {All} x Argument to be checked;
  * @return {Boolean}     is an function
  */
 export const isFunction = (x) => x && toType(x) === 'function';
 
 /**
  * Checks if argument is a string
- * @param  {All} x Variable to be checked
+ * @param  {All} x Argument to be checked
  * @return {Boolean}   is a string
  */
 export const isString = (x) => x && toType(x) === 'string';
 
 /**
  * Checks if argument is ann integer
- * @param  {All} x Variable to be checked
+ * @param  {All} x Argument to be checked
  * @return {Boolean}   is an integer
  */
-export const isInteger = (x) => {
-  return x && (toType(x) === 'number') && (x >= 0) && (x % 1 === 0);
-};
+export const isInteger = (x) => (
+  (toType(x) === 'number') && (x >= 0) && (x % 1 === 0)
+);
 
 /**
  * Returns JSON
  * @param  {Any} obj Object
  * @return {String}     JSON
  */
-export const toJSON = (obj) => obj && isObject(obj) && JSON.stringify(obj);
+export const toJSON = (x) => {
+  if (!x || isNull(x) || !isUndefined(x) || !isFunction(x)) return false;
+  return JSON.stringify(x);
+};
 
 /**
  * Returns a string from an array
@@ -179,7 +198,11 @@ export const pick = (...args) => {
  * @param {Number} a Number
  * @param {Number} b Number
  */
-export const sum = (a, b) => a + b;
+export const sum = (a, b) => {
+  console.log(a, b)
+  if (!isInteger(a) || !isInteger(b)) return false;
+  return a + b;
+};
 
 /**
  * [description]
@@ -193,7 +216,10 @@ export const addInt = (n) => (el) => el + n;
  * @param  {Number} num Integer
  * @return {Number}     Square
  */
-export const square = (num) => num * num;
+export const square = (x) => {
+  if (!isInteger(x)) return false;
+  return x * x;
+};
 
 /**
  * Simple value checker
