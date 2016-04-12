@@ -13,6 +13,7 @@
     "version": "concurrently -r \"npm run build\" \"git add -A dist\"",
     "postversion": "concurrently -r \"git push\" \"git push --tags\"",
     "test": "babel-tape-runner test/*.js | tap-spec",
+    "testcov": "nyc --reporter=lcov babel-tape-runner test/*.js | tap-spec",
     "prebuild": "npm run clean",
     "build": "browserify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map uws-functional.map --output build/uws-functional.map] > build/uws-functional.min.js",
     "watch": "watchify index.js -d -t [ babelify --sourceMapRelative . --presets [ es2015 ] ] -p [ minifyify --map uws-functional.map --output dist/uws-functional.map] -o dist/uws-functional.min.js"
@@ -25,11 +26,13 @@
     "babelify": "^7.2.0",
     "blue-tape": "^0.2.0",
     "browserify": "^13.0.0",
+    "coverify": "^1.4.1",
     "eslint": "^2.4.0",
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-react": "^4.2.3",
     "minifyify": "^7.3.2",
     "mkdirp": "^0.5.1",
+    "nyc": "^6.4.0",
     "rimraf": "^2.5.2",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1"

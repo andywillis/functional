@@ -1,4 +1,4 @@
-import test from 'blue-tape';
+import { test } from 'blue-tape';
 import { join, toType, equalTo } from '../index.js';
 
 let actual;
