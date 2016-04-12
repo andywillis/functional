@@ -10,7 +10,7 @@
     "lint": "eslint test src",
     "clean": "rimraf build && mkdir build",
     "cleanandtest": "concurrently -r \"git clean -d -f\" \"npm run test\"",
-    "version": "concurrently -r \"npm run build\" \"git add -A dist\"",
+    "version": "concurrently -r \"npm run build\" \"git add -A build\"",
     "postversion": "concurrently -r \"git push\" \"git push --tags\"",
     "test": "babel-tape-runner test/*.js | tap-spec",
     "testcov": "nyc --reporter=lcov --reporter=text-lcov babel-tape-runner test/*.js | tap-spec",
