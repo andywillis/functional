@@ -1,5 +1,5 @@
 import test from 'blue-tape';
-import { join, filter, greaterThan, toType, pick, map } from '../index.js';
+import { toJSON, join, filter, greaterThan, toType, pick, map } from '../index.js';
 
 let actual;
 let expected;
@@ -42,12 +42,12 @@ test('pick()', (t) => {
   expected = 'array';
   t.equal(actual, expected, desc);
 
-  desc = join(['map(pick(\'id\'),', b, ') should return correct array of integers']);
+  desc = join(['map(pick(\'id\'),', toJSON(b), ') should return correct array of integers']);
   actual = map(pick('id'), b);
   expected = c;
   t.deepEqual(actual, expected, desc);
 
-  desc = join(['filter(pick(\'id\'),', b, ') should return correct array of objects']);
+  desc = join(['filter(pick(\'id\'),', toJSON(b), ') should return correct array of objects']);
   actual = filter(pick(greaterThan(1), 'id'), b);
   expected = d;
   t.deepEqual(actual, expected, desc);
