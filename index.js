@@ -294,6 +294,6 @@ export const hasSameElements = (x) => {
   if (!x || !isArray(x)) return false;
   return function (y) {
     if (x.length !== y.length) return false;
-    return y.every(el => x.indexOf(el) > -1);
+    return every(el => x.indexOf(el) > -1, y);
   };
 };
