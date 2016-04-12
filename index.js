@@ -33,9 +33,7 @@ export const isArray = (x) => x && toType(x) === 'array';
  * @param  {All} x Argument to be checked;
  * @return {Boolean}     is an object
  */
-export const isObject = (x) => (
-  x && !isNull(x) && toType(x) === 'object'
-);
+export const isObject = (x) => x && !isNull(x) && toType(x) === 'object';
 
 /**
  * Checks if argument is a function
@@ -164,6 +162,7 @@ export const every = (fn, arr) => {
  * @return {Any}        [description]
  */
 export const compose = (...fns) => {
+  if (!fns.length) return false;
   return function (...args) {
     for (let i = fns.length - 1; i >= 0; i--) {
       args = [fns[i].apply(this, args)];
@@ -177,8 +176,9 @@ export const compose = (...fns) => {
  * @param  {Params} args Function list
  * @return {Any}         Output
  */
-export const sequence = (...args) => {
-  return compose.apply(this, args.reverse());
+export const sequence = (...fns) => {
+  if (!fns.length) return false;
+  return compose.apply(this, fns.reverse());
 };
 
 /**
