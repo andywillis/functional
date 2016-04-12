@@ -31,6 +31,7 @@ test('pick()', (t) => {
   const b = [{ id: 1 }, { id: 2 }, { id: 3 }];
   const c = [1, 2, 3];
   const d = [{ id: 2 }, { id: 3 }];
+  const bb = toJSON(b).replace(/"/g, '');
 
   desc = 'Should return 1';
   actual = pick('id')(a);
@@ -42,12 +43,12 @@ test('pick()', (t) => {
   expected = 'array';
   t.equal(actual, expected, desc);
 
-  desc = join(['map(pick(\'id\'),', toJSON(b), ') should return correct array of integers']);
+  desc = join(['map(pick(\'id\'), ', bb, ') should return correct array']);
   actual = map(pick('id'), b);
   expected = c;
   t.deepEqual(actual, expected, desc);
 
-  desc = join(['filter(pick(\'id\'),', toJSON(b), ') should return correct array of objects']);
+  desc = join(['filter(pick(\'id\'), ', bb, ') should return correct array']);
   actual = filter(pick(greaterThan(1), 'id'), b);
   expected = d;
   t.deepEqual(actual, expected, desc);

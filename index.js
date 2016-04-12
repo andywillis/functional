@@ -291,7 +291,7 @@ export const composeObj = (...args) => (
  * @return {Function}   Tests the arr1 against any new array
  */
 export const hasSameElements = (x) => {
-  if (!isArray(x)) return false;
+  if (!x || !isArray(x)) return false;
   return function (y) {
     if (x.length !== y.length) return false;
     return y.every(el => x.indexOf(el) > -1);
