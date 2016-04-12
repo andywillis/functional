@@ -199,7 +199,6 @@ export const pick = (...args) => {
  * @param {Number} b Number
  */
 export const sum = (a, b) => {
-  console.log(a, b)
   if (!isInteger(a) || !isInteger(b)) return false;
   return a + b;
 };
