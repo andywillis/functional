@@ -165,7 +165,7 @@ export const compose = (...fns) => {
   if (!fns.length) return false;
   return function (...args) {
     for (let i = fns.length - 1; i >= 0; i--) {
-      args = [fns[i].apply(this, args)];
+      args = [fns[i].apply(this, [args[0]])];
     }
     return args[0];
   };
