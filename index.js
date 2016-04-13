@@ -204,11 +204,14 @@ export const sum = (a, b) => {
 };
 
 /**
- * [description]
- * @param  {[type]} n) [description]
- * @return {[type]}    [description]
+ * Return a function to add an integer to another
+ * @param  {Integer} n Integer
+ * @return {Function}    Iterator
  */
-export const addInt = (n) => (el) => el + n;
+export const addInt = (n) => {
+  if (!n || !isInteger(n)) return false;
+  return (el) => el + n;
+};
 
 /**
  * Simple square function
@@ -216,7 +219,7 @@ export const addInt = (n) => (el) => el + n;
  * @return {Number}     Square
  */
 export const square = (x) => {
-  if (!isInteger(x)) return false;
+  if (!x || !isInteger(x)) return false;
   return x * x;
 };
 
